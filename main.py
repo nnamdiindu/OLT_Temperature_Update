@@ -11,7 +11,7 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option("detach", True)
 
 driver = webdriver.Chrome(options=chrome_options)
-ip_addresses = ["http://10.0.4.125/", "http://10.0.4.90/"]
+ip_addresses = ["http://10.0.04.142/", "http://10.0.4.90/", "http://10.0.4.103/", "http://10.0.4.40/", "http://10.0.4.44/", "http://10.0.4.43/", "http://10.0.4.60/"]
 
 for ip_address in ip_addresses:
     driver.get(f"{ip_address}")
