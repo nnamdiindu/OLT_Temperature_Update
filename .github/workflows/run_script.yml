@@ -25,35 +25,24 @@ jobs:
           
       - name: Install Chromedriver and Chrome
         run: |
-          echo "Installing system dependencies for Chrome/ChromeDriver..."
-          # (Removed problematic packages libgconf-2-4 and libasound2)
+          sudo apt-get update
           sudo apt-get install -y wget unzip gnupg libnss3 libxss1 libgtk-3-0 libatk-bridge2.0-0 libatk1.0-0 libx11-xcb1 --no-install-recommends
-          
-          echo "Downloading and Installing Google Chrome v133.0.6943.98..."
+      
           CHROME_VERSION="133.0.6943.98"
           wget -O /tmp/chrome-linux64.zip "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chrome-linux64.zip"
-          
-          # Extract Chrome binary
           sudo unzip -o /tmp/chrome-linux64.zip -d /opt/google/chrome/
           sudo ln -sf /opt/google/chrome/chrome /usr/bin/google-chrome
-          
-          echo "Installed Google Chrome version:"
           google-chrome --version
-          
-          # echo "Installing ChromeDriver for Chrome v104..."
-          # Retrieve the latest ChromeDriver version for Chrome 104
-          # CHROME_DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_104)
-          # echo "Using ChromeDriver version: ${CHROME_DRIVER_VERSION}"
-          
-          echo "Using ChromeDriver version: 133.0.6943.98"
-          # wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/${CHROME_DRIVER_VERSION}/chromedriver_linux64.zip
-          wget -O /tmp/chromedriver.zip https://storage.googleapis.com/chrome-for-testing-public/133.0.6943.98/linux64/chromedriver-linux64.zip
-          
-          sudo unzip -o /tmp/chromedriver.zip # -d /usr/local/bin/
-          sudo chmod +x /tmp/chromedriver
-          
+      
+          echo "Installing ChromeDriver version ${CHROME_VERSION}..."
+          wget -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip"
+      
+          # extract only the chromedriver binary from the nested folder into /usr/local/bin
+          sudo unzip -j /tmp/chromedriver.zip 'chromedriver-linux64/chromedriver' -d /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+      
           echo "Installed ChromeDriver version:"
-          sudo /tmp/chromedriver --version
+          /usr/local/bin/chromedriver --version
     
       - name: Install dependencies
         run: |
