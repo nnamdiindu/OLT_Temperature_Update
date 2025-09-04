@@ -85,6 +85,7 @@ class OLTTemperatureMonitor:
             chrome_options.add_argument("--disable-gpu")
             chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
             chrome_options.add_experimental_option('useAutomationExtension', False)
+            chrome_options.binary_location = "/opt/google/chrome/chrome"   # point to your 133 binary
 
             self.driver = webdriver.Chrome(options=chrome_options)
             self.driver.implicitly_wait(10)
