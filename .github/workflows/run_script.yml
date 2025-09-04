@@ -1,0 +1,48 @@
+name: Scrape Email
+
+on:
+  push:
+    branches:
+      - main  
+  workflow_dispatch: {}  # Add workflow dispatch for manual triggering
+
+jobs:
+  Scrape-Email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+        
+      - name: Install dependencies
+        run: |
+          git config user.email "luckyodi310@gmail.com"
+          git config user.name "Nnamdi Odi"
+          python -m pip install --upgrade pip
+          python -m pip install "dask[distributed]" --upgrade
+          pip install -r requirements.txt
+
+      - name: Run Scrapper
+        env:
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+        run: |
+          python email_scrapper.py          
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --exit-code || echo "::set-output name=changes::true"
+
+      - name: Commit and Push Changes
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          git pull
+          git add .
+          git commit -m "Scraped emails"
+          git remote set-url origin https://$API_TOKEN@github.com/nnamdiindu/OLT_Temperature_Update.git
+          git push
