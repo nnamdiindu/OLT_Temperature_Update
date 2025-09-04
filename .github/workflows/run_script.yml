@@ -1,13 +1,17 @@
-name: Scrape Email
+name: Check Temperature
 
 on:
   push:
     branches:
       - main  
   workflow_dispatch: {}  # Add workflow dispatch for manual triggering
+  schedule:
+    - cron: '54 9 * * *'   # 09:00 (UTC) daily
+    - cron: '54 12 * * *'   # 12:00 (UTC) daily
+    - cron: '54 17 * * *'   # 17:00 (UTC) daily
 
 jobs:
-  Scrape-Email:
+  Check-Temperature:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,7 +35,7 @@ jobs:
         env:
           API_TOKEN: ${{ secrets.API_TOKEN }}
         run: |
-          python email_scrapper.py          
+          python test.py          
 
       - name: Check for changes
         id: check_changes
