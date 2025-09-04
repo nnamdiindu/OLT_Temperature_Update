@@ -34,6 +34,12 @@ jobs:
       - name: Run Scrapper
         env:
           API_TOKEN: ${{ secrets.API_TOKEN }}
+          USER: ${{ secrets.USER }}
+          PASSWORD_: ${{ secrets.PASSWORD_ }}
+          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
+          MY_EMAIL: ${{ secrets.MY_EMAIL }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+
         run: |
           python test.py          
 
