@@ -28,14 +28,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y wget unzip gnupg libnss3 libxss1 libgtk-3-0 libatk-bridge2.0-0 libatk1.0-0 libx11-xcb1 --no-install-recommends
       
-          CHROME_VERSION="133.0.6943.98"
-          wget -O /tmp/chrome-linux64.zip "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chrome-linux64.zip"
+          CHROME_VERSION="140.0.7339.80"
+          wget -O /tmp/chrome-linux64.zip "https://storage.googleapis.com/chrome-for-testing-public/140.0.7339.80/linux64/chrome-linux64.zip"
           sudo unzip -o /tmp/chrome-linux64.zip -d /opt/google/chrome/
           sudo ln -sf /opt/google/chrome/chrome /usr/bin/google-chrome
           google-chrome --version
       
-          echo "Installing ChromeDriver version ${CHROME_VERSION}..."
-          wget -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip"
+          echo "Installing ChromeDriver version 140.0.7339.80"
+          wget -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/140.0.7339.80/linux64/chromedriver-linux64.zip"
       
           # extract only the chromedriver binary from the nested folder into /usr/local/bin
           sudo unzip -j /tmp/chromedriver.zip 'chromedriver-linux64/chromedriver' -d /usr/local/bin/
