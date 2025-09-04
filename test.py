@@ -19,49 +19,58 @@ class OLTTemperatureMonitor:
     def __init__(self):
         load_dotenv()
         self.ip_addresses = [
-            "http://10.0.04.142/", "http://10.0.4.90/", "http://10.0.4.103/", "http://10.0.4.40/", "http://10.0.4.44/",
-            "http://10.0.4.43/", "http://10.0.4.60/","http://10.0.4.86/", "http://10.0.4.87/", "http://10.0.4.41/",
-            "http://10.0.4.21/","http://10.0.4.162/","http://10.0.4.160/", "http://10.0.4.161/", "http://10.0.4.138/",
-            "http://10.0.4.129/", "http://10.0.4.75/","http://10.0.4.96/", "http://10.0.4.97/", "http://10.0.4.149/",
-            "http://10.0.4.150/", "http://10.0.4.136/","http://10.0.4.91/", "http://10.0.4.130/", "http://10.0.4.134/",
-            "http://10.0.4.128/", "http://10.0.4.125/","http://10.0.4.126/", "http://10.0.4.129/", "http://10.0.4.69/",
-            "http://10.0.4.140/", "http://10.0.4.132/","http://10.0.4.133/", "http://10.0.4.131/", "http://10.0.4.117/",
-            "http://10.0.4.118/", "http://10.0.4.123/", "http://10.0.4.124/", "http://10.0.4.110/", "http://10.0.4.17/",
-            "http://10.0.4.90/", "http://10.0.4.91/", "http://10.0.4.106/", "http://10.0.4.107/", "http://10.0.4.108/",
-            "http://10.0.4.109/", "http://10.0.4.42/", "http://10.0.4.63/", "http://10.0.4.43/", "http://10.0.4.44/",
-            "http://10.0.4.50/", "http://10.0.4.40/", "http://10.0.4.103/", "http://10.0.4.48/", "http://10.0.4.93/",
-            "http://10.0.4.92/", "http://10.0.4.23/", "http://10.0.4.80/", "http://10.0.4.82/", "http://10.0.4.83/",
-            "http://10.0.4.84/", "http://10.0.4.61/", "http://10.0.4.88/", "http://10.0.4.89/", "http://10.0.4.74/",
-            "http://10.0.4.62/", "http://10.0.4.85/", "http://10.0.4.20/", "http://10.0.4.65/", "http://10.0.4.66/",
-            "http://10.0.4.67/", "http://10.0.4.71/", "http://10.0.4.72/", "http://10.0.4.45/", "http://10.0.4.46/",
-            "http://10.0.4.47/", "http://10.0.4.52/", "http://10.0.4.60/", "http://10.0.4.59/", "http://10.0.4.64/",
-            "http://10.0.4.51/", "http://10.0.4.78/", "http://10.0.4.79/", "http://10.0.4.144/", "http://10.0.4.145/",
-            "http://10.0.4.132/", "http://10.0.4.133/", "http://10.0.4.148/"
+            "http://10.0.4.60/", "http://10.0.04.142/", "http://10.0.4.90/", "http://10.0.4.44/",
+            "http://10.0.4.43/", "http://10.0.4.103/", "http://10.0.4.40/", "http://10.0.4.138/",
+
+
+            # "http://10.0.4.86/", "http://10.0.4.87/","http://10.0.4.41/",
+            # "http://10.0.4.21/","http://10.0.4.162/","http://10.0.4.160/", "http://10.0.4.161/", ,
+            # "http://10.0.4.129/", "http://10.0.4.75/","http://10.0.4.96/", "http://10.0.4.97/", "http://10.0.4.149/",
+            # "http://10.0.4.150/", "http://10.0.4.136/","http://10.0.4.91/", "http://10.0.4.130/", "http://10.0.4.134/",
+            # "http://10.0.4.128/", "http://10.0.4.125/","http://10.0.4.126/", "http://10.0.4.129/", "http://10.0.4.69/",
+            # "http://10.0.4.140/", "http://10.0.4.132/","http://10.0.4.133/", "http://10.0.4.131/", "http://10.0.4.117/",
+            # "http://10.0.4.118/", "http://10.0.4.123/", "http://10.0.4.124/", "http://10.0.4.110/", "http://10.0.4.17/",
+            # "http://10.0.4.90/", "http://10.0.4.91/", "http://10.0.4.106/", "http://10.0.4.107/", "http://10.0.4.108/",
+            # "http://10.0.4.109/", "http://10.0.4.42/", "http://10.0.4.63/", "http://10.0.4.43/", "http://10.0.4.44/",
+            # "http://10.0.4.50/", "http://10.0.4.40/", "http://10.0.4.103/", "http://10.0.4.48/", "http://10.0.4.93/",
+            # "http://10.0.4.92/", "http://10.0.4.23/", "http://10.0.4.80/", "http://10.0.4.82/", "http://10.0.4.83/",
+            # "http://10.0.4.84/", "http://10.0.4.61/", "http://10.0.4.88/", "http://10.0.4.89/", "http://10.0.4.74/",
+            # "http://10.0.4.62/", "http://10.0.4.85/", "http://10.0.4.20/", "http://10.0.4.65/", "http://10.0.4.66/",
+            # "http://10.0.4.67/", "http://10.0.4.71/", "http://10.0.4.72/", "http://10.0.4.45/", "http://10.0.4.46/",
+            # "http://10.0.4.47/", "http://10.0.4.52/", "http://10.0.4.60/", "http://10.0.4.59/", "http://10.0.4.64/",
+            # "http://10.0.4.51/", "http://10.0.4.78/", "http://10.0.4.79/", "http://10.0.4.144/", "http://10.0.4.145/",
+            # "http://10.0.4.132/", "http://10.0.4.133/", "http://10.0.4.148/"
         ]
         self.olt_locations = [
-            "LOS-SUNSHINEESTATE-FD1700S-001", "LOS-IKONECTT-SUNSHINEESTATE-001", "LOS-UNITYHOMESESTATE-FD1700S-002",
-            "LOS-UNITYHOMESESTATE-FD1700S-001", "LOSCEDARCOUNTY-OLT-FD1700S-001", "LOSCEDARCOUNTY-OLT-FD1700S-002",
-            "LOS-IKONECTT-AVERA-OLT-FD1700S-001", "LOS-LekkiGardensPH5-OLT-001", "LOS-LekkiGardensPH5-OLT-002",
-            "LOS-EricmoreOLT", "L0S-SpringbayOLT", "los29-olt-001", "LOS-BEACHFRONT-OLT-001", "LOS-ATLANTICVILLE-001",
-            "LOS-IKONECTT-LEKKIGARDENS2-001", "LOSOAMS-ILUPEJU-OLT-001", "LOS-NEWHORIZON_OFFICE-OLT-001",
-            "LOS-JORAESTATE-OLT-001", "LOS-JORAESTATE-OLT-002", "LOS-YABACLUSTER3-OLT-001", "LOS-YABACLUSTER3-OLT-002",
-            "LOS-DIVINEESTATE-OLT-001", "LOS-SILVERPOINTESTATE-OLT-002", "LOS-SILVERPOINTESTATE-OLT-001",
-            "LOSDOLPHINESTATE-OLT-001", "LOS-SEASIDEESTATE-OLT-003", "LOS-MANORESTATE-OLT-001", "LOS-MANORESTATE-OLT-002",
-            "LOS-OAM-ILUPEJU-001", "LOS-IKONECCT-MIJIL", "LOS-MIJIL-OLT-002", "LOS-INFINITY-001","LOS-INFINITY-002",
-            "LOS-RACKCENTER", "LOS-SOUTHDRIFTESTATE-OLT-001", "LOS-SOUTHDRIFTESTATE-OLT-002", "LOS-OLALEYE-OLT-001",
-            "LOS-OLALEYE-OLT-002", "LOS-ATUNRASE-OLT-1", "Bashorun-Wacs Redundancy Leg", "LOS-SunshineEstate-OLT-001",
-            "LOS-SunshineEstate-OLT-002", "LOS-MILLENIUMGBAGADA-OLT-001", "LOS-MILLENIUMGBAGADA-OLT-002",
-            "LOS-MILLENIUMGBAGADA-OLT-003", "LOS-MILLENIUMGBAGADA-OLT-004", "LOS-IKONNECT-OCEANPALM-001",
-            "LOS-IKONNECT-OCEANPALM-002", "LOS-IKONNECT-CEDARCOUNTY-001", "LOS-IKONNECT-CEDARCOUNTY-002", "LOS-dideolu-OLT-002",
-            "LOS-UNITYHOMES-OLT-001", "LOS-UNITYHOMES-OLT-002", "LOS-IKONNECTT-BUENAVISTA-002", "LOS-OloriMojisolaOnikoyi-001",
-            "LOS-ACADIA MEWS Outdoor-OLT", "LOS-CWG-OLT", "LOS-Chevvy Estate-OLT-001", "LOS-United Estates-OLT-001",
-            "LOS-UnitedEstates-OLT-002", "LOS-UnitedEstates-OLT-003", "LOS-OguduGRAOLT", "LOS-ChevvyEstate-OLT-002",
-            "LOS-ChevvyEstate-OLT-003", "LOS-OguduGRAOLT-002", "LOS-WhiteOaks-OLT", "LOS-Bashorun-OLT", "LOS-ACA-OLT",
-            "LOS-IDS-OLT-001", "LOS-IDS-OLT-002", "LOS-IDS-OLT-003", "LOS-IDS-OLT-004", "LOS-OfficeOLT-001",
-            "LOS-Computervillage-OLT-001", "LOS-Computervillage-OLT-002", "LOS-IKONNECTT-BUENAVISTA-001", "LOS-PeacevilleOLT",
-            "LOS-AveraOLT-002", "LOS01-OLT-001(OADC)", "LOS-karimu-OLT-001", "LOS-Oriola", "LOS-OsborneOLT",
-            "LOS-Millenium(Cobranet)OLT", "LOS-IKONNECTT-GREENVILLE-002", "LOS-IKONNECTT-GREENVILLE-003",
-            "LOS-IKONNECTT-INFINITYESTATE-001", "LOS-IKONNECTT-INFINITYESTATE-002", "LOS-ACADIAGROOVE-001"
+            "Avera OLT 1", "Sunshine OLT 1", "Sunshine OLT 2", "Cedar-County OLT 1", "Cedar-County OLT 2",
+            "Unity OLT 1", "Unity OLT 2", "Lekki Gardens OLT 1"
+
+            # "LOS-IKONECTT-AVERA-OLT-FD1700S-001", "LOS-SUNSHINEESTATE-FD1700S-001", "LOS-IKONECTT-SUNSHINEESTATE-001",
+            # "LOSCEDARCOUNTY-OLT-FD1700S-001", "LOSCEDARCOUNTY-OLT-FD1700S-002", "LOS-UNITYHOMESESTATE-FD1700S-002",
+            # "LOS-UNITYHOMESESTATE-FD1700S-001", "LOS-IKONECTT-LEKKIGARDENS2-001",
+
+
+            # "LOS-LekkiGardensPH5-OLT-001", "LOS-LekkiGardensPH5-OLT-002",
+            # "LOS-EricmoreOLT", "L0S-SpringbayOLT", "los29-olt-001", "LOS-BEACHFRONT-OLT-001", "LOS-ATLANTICVILLE-001",
+            # , "LOSOAMS-ILUPEJU-OLT-001", "LOS-NEWHORIZON_OFFICE-OLT-001",
+            # "LOS-JORAESTATE-OLT-001", "LOS-JORAESTATE-OLT-002", "LOS-YABACLUSTER3-OLT-001", "LOS-YABACLUSTER3-OLT-002",
+            # "LOS-DIVINEESTATE-OLT-001", "LOS-SILVERPOINTESTATE-OLT-002", "LOS-SILVERPOINTESTATE-OLT-001",
+            # "LOSDOLPHINESTATE-OLT-001", "LOS-SEASIDEESTATE-OLT-003", "LOS-MANORESTATE-OLT-001", "LOS-MANORESTATE-OLT-002",
+            # "LOS-OAM-ILUPEJU-001", "LOS-IKONECCT-MIJIL", "LOS-MIJIL-OLT-002", "LOS-INFINITY-001","LOS-INFINITY-002",
+            # "LOS-RACKCENTER", "LOS-SOUTHDRIFTESTATE-OLT-001", "LOS-SOUTHDRIFTESTATE-OLT-002", "LOS-OLALEYE-OLT-001",
+            # "LOS-OLALEYE-OLT-002", "LOS-ATUNRASE-OLT-1", "Bashorun-Wacs Redundancy Leg", "LOS-SunshineEstate-OLT-001",
+            # "LOS-SunshineEstate-OLT-002", "LOS-MILLENIUMGBAGADA-OLT-001", "LOS-MILLENIUMGBAGADA-OLT-002",
+            # "LOS-MILLENIUMGBAGADA-OLT-003", "LOS-MILLENIUMGBAGADA-OLT-004", "LOS-IKONNECT-OCEANPALM-001",
+            # "LOS-IKONNECT-OCEANPALM-002", "LOS-IKONNECT-CEDARCOUNTY-001", "LOS-IKONNECT-CEDARCOUNTY-002", "LOS-dideolu-OLT-002",
+            # "LOS-UNITYHOMES-OLT-001", "LOS-UNITYHOMES-OLT-002", "LOS-IKONNECTT-BUENAVISTA-002", "LOS-OloriMojisolaOnikoyi-001",
+            # "LOS-ACADIA MEWS Outdoor-OLT", "LOS-CWG-OLT", "LOS-Chevvy Estate-OLT-001", "LOS-United Estates-OLT-001",
+            # "LOS-UnitedEstates-OLT-002", "LOS-UnitedEstates-OLT-003", "LOS-OguduGRAOLT", "LOS-ChevvyEstate-OLT-002",
+            # "LOS-ChevvyEstate-OLT-003", "LOS-OguduGRAOLT-002", "LOS-WhiteOaks-OLT", "LOS-Bashorun-OLT", "LOS-ACA-OLT",
+            # "LOS-IDS-OLT-001", "LOS-IDS-OLT-002", "LOS-IDS-OLT-003", "LOS-IDS-OLT-004", "LOS-OfficeOLT-001",
+            # "LOS-Computervillage-OLT-001", "LOS-Computervillage-OLT-002", "LOS-IKONNECTT-BUENAVISTA-001", "LOS-PeacevilleOLT",
+            # "LOS-AveraOLT-002", "LOS01-OLT-001(OADC)", "LOS-karimu-OLT-001", "LOS-Oriola", "LOS-OsborneOLT",
+            # "LOS-Millenium(Cobranet)OLT", "LOS-IKONNECTT-GREENVILLE-002", "LOS-IKONNECTT-GREENVILLE-003",
+            # "LOS-IKONNECTT-INFINITYESTATE-001", "LOS-IKONNECTT-INFINITYESTATE-002", "LOS-ACADIAGROOVE-001"
         ]
         self.driver = None
         self.temperature_data = []
@@ -239,17 +248,17 @@ class OLTTemperatureMonitor:
                 self.driver.quit()
                 logger.info("Browser driver closed")
 
-    def save_to_file(self, filename="olt_temperature.txt"):
-        """Save temperature data to file"""
-        try:
-            with open(filename, "w") as file:  # Use 'w' to overwrite previous data
-                file.write(f"OLT Temperature Report - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-                file.write("=" * 60 + "\n")
-                for data in self.temperature_data:
-                    file.write(f"{data['location']}: {data['temperature']}℃ (Time: {data['timestamp']})\n")
-            logger.info(f"Temperature data saved to {filename}")
-        except Exception as e:
-            logger.error(f"Error saving to file: {e}")
+    # def save_to_file(self, filename="olt_temperature.txt"):
+    #     """Save temperature data to file"""
+    #     try:
+    #         with open(filename, "w") as file:  # Use 'w' to overwrite previous data
+    #             file.write(f"OLT Temperature Report - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+    #             file.write("=" * 60 + "\n")
+    #             for data in self.temperature_data:
+    #                 file.write(f"{data['location']}: {data['temperature']}℃ (Time: {data['timestamp']})\n")
+    #         logger.info(f"Temperature data saved to {filename}")
+    #     except Exception as e:
+    #         logger.error(f"Error saving to file: {e}")
 
     def send_email_report(self):
         """Send temperature report via email"""
@@ -264,7 +273,7 @@ class OLTTemperatureMonitor:
                 status = "⚠️ ALERT" if data['temperature'] == 'ERROR' or data[
                     'temperature'] == 'LOGIN_FAILED' else "✅ OK"
                 body += f"{data['location']}:\n"
-                body += f"  Temperature: {data['temperature']}℃\n"
+                body += f"  Temperature: {data['temperature']}\n"
                 body += f"  IP: {data['ip']}\n"
                 body += f"  Status: {status}\n"
                 body += f"  Timestamp: {data['timestamp']}\n\n"
@@ -280,7 +289,7 @@ class OLTTemperatureMonitor:
                 )
                 connection.sendmail(
                     from_addr=os.environ.get("MY_EMAIL"),
-                    to_addrs=os.environ.get("MY_EMAIL"),
+                    to_addrs=os.environ.get("RECEIVER_EMAIL"),
                     msg=f"Subject:{subject}\n\n{body}".encode('utf-8')
                 )
 
@@ -293,7 +302,7 @@ class OLTTemperatureMonitor:
         """Main method to run the complete monitoring process"""
         logger.info("Starting OLT temperature monitoring")
         self.collect_temperatures()
-        self.save_to_file()
+        # self.save_to_file()
         self.send_email_report()
         logger.info("OLT temperature monitoring completed")
 
