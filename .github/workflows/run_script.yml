@@ -22,6 +22,63 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
+
+      - name: Clean up
+        run: |
+          # --- Remove Chrome APT packages (stable/beta/unstable) ---
+          sudo apt-get remove --purge -y google-chrome-stable google-chrome-beta google-chrome-unstable || true
+          sudo apt-get remove --purge -y google-chrome || true
+          
+          # --- Remove Chromium (if installed via apt) ---
+          sudo apt-get remove --purge -y chromium-browser chromium || true
+          
+          # --- Remove any leftover .deb-installed files and stale apt entries ---
+          sudo apt-get autoremove -y || true
+          sudo apt-get autoclean -y || true
+          
+          # --- Remove Chrome-for-testing or manual installs under /opt ---
+          if [ -d /opt/google/chrome ]; then
+            echo "Removing /opt/google/chrome"
+            sudo rm -rf /opt/google/chrome
+          fi
+          
+          # --- Remove symlink(s) that may point to custom chrome binary ---
+          if [ -L /usr/bin/google-chrome ]; then
+            echo "Removing /usr/bin/google-chrome symlink"
+            sudo rm -f /usr/bin/google-chrome
+          fi
+          
+          # Also remove other common symlink names
+          sudo rm -f /usr/bin/google-chrome-stable /usr/bin/chrome /usr/bin/chromium || true
+          
+          # --- Remove Chromedriver binaries from common paths ---
+          sudo rm -f /usr/local/bin/chromedriver
+          sudo rm -f /usr/bin/chromedriver
+          sudo rm -f /tmp/chromedriver /tmp/chromedriver* || true
+          
+          # --- Remove extracted chromedriver directories if present ---
+          sudo rm -rf /tmp/chromedriver-linux64 || true
+          
+          # --- Remove Chrome installed via snap (if applicable) ---
+          if command -v snap >/dev/null 2>&1; then
+            if snap list | grep -i 'chrom' >/dev/null 2>&1; then
+              echo "Removing snap chrome/chromium"
+              sudo snap remove chromium || true
+            fi
+          fi
+          
+          # --- Clean again ---
+          sudo apt-get autoremove -y || true
+          sudo apt-get autoclean -y || true
+          
+          # --- Verify removal (print results) ---
+          echo "----- Verification -----"
+          which google-chrome || echo "google-chrome not found"
+          which chromedriver || echo "chromedriver not found"
+          google-chrome --version 2>/dev/null || echo "google-chrome --version failed (not installed)"
+          chromedriver --version 2>/dev/null || echo "chromedriver --version failed (not installed)"
+          ls -la /opt/google/chrome 2>/dev/null || echo "/opt/google/chrome not present"
+          ls -la /usr/local/bin/chromedriver 2>/dev/null || echo "/usr/local/bin/chromedriver not present"
           
       - name: Install Chromedriver and Chrome
         run: |
